@@ -176,7 +176,7 @@
         {
             foreach (DayAndSlotNumber dayAndSlotNumber in WhenSessionsAre)
             {
-                if (dayAndSlotNumber.GetDay() == day)
+                if (dayAndSlotNumber.Day == day)
                     return true;
             }
             return false;

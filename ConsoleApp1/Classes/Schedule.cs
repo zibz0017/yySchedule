@@ -3,9 +3,17 @@
     public static class Schedule
     {
         // Days; Slots; Sessions in slot
-        static List<List<List<Session>>> Calendar = new List<List<List<Session>>>(); // Point 1
+        static List<List<List<Session>>> Calendar = new List<List<List<Session>>>()// Point 1
         static int AmountOfDays { get; set; }
-        static List<int> SlotsPerDay = new List<int>();
+        static int SlotsPerDay { get; set; }
+
+        public static void InitialSetup()
+        {
+            for (int i = 0; i < AmountOfDays; i++)
+            {
+                Calendar.Add(new List<List<Session>>(SlotsPerDay));
+            }
+        }
 
         // Point 2
         public static bool CheckIfSessionOnDay(Session session, int day)
@@ -106,10 +114,5 @@
             return Calendar;
         }
 
-        // Currently only used for in testing to reset the Calendar
-        public static void ClearSchedule()
-        {
-            List<List<List<Session>>> Calendar = new List<List<List<Session>>>();
-        }
     }
 }

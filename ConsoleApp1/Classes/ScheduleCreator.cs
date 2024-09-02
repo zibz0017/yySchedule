@@ -12,6 +12,7 @@
         bool FoundSolution = false;
         public void CreateSchedule()
         {
+            Schedule.InitialSetup();
             while (SessionsCounter >= 0)
             { // Point 4
                 CurrentSession = SessionsToAdd[SessionsCounter];
@@ -36,7 +37,7 @@
                         // Start from the beginning of the next day (because we can't have 2 of the same sessions
                         // on the same day).
                         DayAndSlotNumber dayAndSlotNumber = CurrentSession.GetWhenSessionsAre().Last();
-                        DayOfWeekCounter = dayAndSlotNumber.GetDay() + 1;
+                        DayOfWeekCounter = dayAndSlotNumber.Day + 1;
                     }
                     SlotCounter = 0;
                 }
@@ -52,10 +53,10 @@
                     }
                     DayAndSlotNumber dayAndSlotNumber = CurrentSession.GetWhenSessionsAre().Last();
                     CurrentSession.RemoveLastFromWhenSessionsAre();
-                    Schedule.RemoveSessionsFromSlots(CurrentSession, dayAndSlotNumber.GetDay(),
-                        dayAndSlotNumber.GetSlotNumber());
-                    DayOfWeekCounter = dayAndSlotNumber.GetDay();
-                    SlotCounter = dayAndSlotNumber.GetSlotNumber() + 1;
+                    Schedule.RemoveSessionsFromSlots(CurrentSession, dayAndSlotNumber.Day,
+                        dayAndSlotNumber.SlotNumber);
+                    DayOfWeekCounter = dayAndSlotNumber.Day;
+                    SlotCounter = dayAndSlotNumber.SlotNumber + 1;
                 }
                 for (DayOfWeekCounter = 0; DayOfWeekCounter < Schedule.GetDaysWithSessions(); DayOfWeekCounter++)
                 {
@@ -101,7 +102,7 @@
                             continue;
                         // Check for anything else that needs checking (can't think of anything else right now)
                         // Add session to slot, change FoundSlotForSession, and leave loop,
-                        Schedule.AddSessionsToSlots(DayOfWeekCounter, SlotCounter, SessionsToAdd[SessionsCounter]);
+                        Schedule.AddSessionsToSlots(SessionsToAdd[SessionsCounter], DayOfWeekCounter, SlotCounter);
                         CurrentSession.AddNewSessionTime(DayOfWeekCounter, SlotCounter);
                         FoundSlotForSession = true;
                         break;
