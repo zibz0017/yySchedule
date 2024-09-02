@@ -3,15 +3,22 @@
     public static class Schedule
     {
         // Days; Slots; Sessions in slot
-        static List<List<List<Session>>> Calendar = new List<List<List<Session>>>()// Point 1
-        static int AmountOfDays { get; set; }
-        static int SlotsPerDay { get; set; }
+        static List<List<List<Session>>> Calendar = new List<List<List<Session>>>();// Point 1
+        public static int AmountOfDays { get; set; }
+        public static List<int> SlotsPerDay = new List<int>(AmountOfDays); // Each index represents the amount of slots there are on a specific day
 
         public static void InitialSetup()
         {
             for (int i = 0; i < AmountOfDays; i++)
             {
-                Calendar.Add(new List<List<Session>>(SlotsPerDay));
+                List<List<Session>> slots = new List<List<Session>>(SlotsPerDay[i]);
+                
+                for (int j = 0; j < SlotsPerDay[i]; j++)
+                {
+                    List<Session> slot = new List<Session>(10);
+                    slots.Add(slot);
+                }
+                Calendar.Add(slots);
             }
         }
 

@@ -165,6 +165,8 @@ namespace TestProject1
 
         public List<Session> ScheduleTest1Setup()
         {
+            Schedule.AmountOfDays = 5;
+            Schedule.SlotsPerDay = new List<int> { 10, 10, 10, 10, 10 };
             Schedule.InitialSetup();
             TimeRestriction timeRestriction = new TimeRestriction(true);
             List<TimeRestriction> timeRestrictions = new List<TimeRestriction>()
