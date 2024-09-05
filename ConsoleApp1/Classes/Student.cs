@@ -2,8 +2,8 @@
 {
     public class Student
     {
-        string FirstName { get; set } // Point 1
-        string LastName { get; set } // Point 1
+        string FirstName; // Point 1
+        string LastName; // Point 1
         List<TimeRestriction> TimeRestrictions = new List<TimeRestriction>(); // Point 2
 
         public Student(List<TimeRestriction> timeRestrictions)
