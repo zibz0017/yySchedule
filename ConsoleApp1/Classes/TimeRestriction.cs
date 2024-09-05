@@ -4,9 +4,9 @@ namespace ConsoleApp1.Classes
 {
     public class TimeRestriction
     {
-        bool IfCanBeSessionsToday; // Point 3
-        int EarliestSlot = 0; // Point 2
-        int LatestSlot = int.MaxValue; // Point 2
+        bool IfCanBeSessionsToday { get; set } // Point 3
+        int EarliestSlot { get; set } = 0; // Point 2
+        int LatestSlot { get; set } = int.MaxValue; // Point 2
 
         public TimeRestriction(bool ifCanBeSessionsToday)
         {
@@ -18,16 +18,6 @@ namespace ConsoleApp1.Classes
             IfCanBeSessionsToday= ifCanBeSessionsToday;
             EarliestSlot = earliestSlot;
             LatestSlot = latestSlot;
-        }
-
-        public bool GetIfCanBeSessionsToday()
-        {
-            return IfCanBeSessionsToday;
-        }
-
-        public bool GetIfCanBeSessionAtThisSlot(int slot)
-        {
-            return slot >= EarliestSlot && slot <= LatestSlot;
         }
     }
 }

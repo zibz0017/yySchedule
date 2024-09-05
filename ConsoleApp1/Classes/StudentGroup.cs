@@ -2,6 +2,6 @@
 {
     public class StudentGroup
     {
-        List<Student> Group;
+        List<Student> Group = new List<Student>;
     }
 }

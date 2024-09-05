@@ -2,20 +2,20 @@
 {
     public class Session
     {
-        string Name;
+        string Name { get; set }
         // TODO There is currently no check on if there are any instructors or students in a session.
         // While it is olay for some sessions not to have instructors or not to have students, it
         // can't have none of each. There should be a check for this. Also, there is no check on whether
         // an instructor or student has been added twice. Perhaps turn the List into a Set.
         List<Instructor> Instructors = new List<Instructor>(); // Point 1
         List<Student> Students = new List<Student>(); // Point 1
-        int TimesPerWeek; // Point 2
-        string SessionGroup = ""; // Point 3
-        List<TimeRestriction> TimeRestrictions;// Point 4
-        Session? NotAfter; // Point 5
-        Session? NotBefore; // Point 5
+        int TimesPerWeek { get; set } // Point 2
+        string SessionGroup { get; set } = ""; // Point 3
+        List<TimeRestriction> TimeRestrictions = new List<TimeRestriction>;// Point 4
+        Session? NotAfter { get; set } // Point 5
+        Session? NotBefore { get; set } // Point 5
         List<DayAndSlotNumber> WhenSessionsAre = new List<DayAndSlotNumber>(); // Point 6
-        int LengthOfSessions;
+        int LengthOfSessions { get; set }
 
         public Session(List<Instructor> instructors, List<Student> students, int timesPerWeek,
             List<TimeRestriction> timeRestrictions, Session? notAfter, Session? notBefore, int lengthOfSessions)
