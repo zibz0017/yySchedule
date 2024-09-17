@@ -117,29 +117,6 @@
             return true;
         }
 
-        // I don't think this method is needed
-        public override bool Equals(object? obj)
-        {
-            if (obj is Session session)
-            {
-                if (GetStudents().Count != session.GetStudents().Count)
-                    return false;
-
-                foreach (Student student in GetStudents())
-                {
-                    if (!session.GetStudents().Contains(student))
-                        return false;
-                }
-
-                if (!session.GetInstructors().Equals(GetInstructors()))
-                    return false;
-            }
-            else
-                return false;
-
-            return true;
-        }
-
         // This only adds the slot the session starts in, not the all the slots that the session takes place in.
         public void AddNewSessionTime(int day, int slot)
         {
@@ -180,6 +157,37 @@
                     return true;
             }
             return false;
+        }
+
+        // This takes the assumption that teachers and students onlh have one type of session together
+        // If a single teacher can have different types of sessions with the same student, the method
+        // would need to be updated to make sure that the different sessions would not be considered the
+        // same by the method.
+        // Also, I think it may make more sense to create some sort of id for every session and compare
+        // them. This would take care of the previous problem.
+        public override bool Equals(object? obj)
+        {
+            if (obj is Session session)
+            {
+                if (GetStudents().Count != session.GetStudents().Count)
+                    return false;
+
+                foreach (Student student in GetStudents())
+                {
+                    if (!session.GetStudents().Contains(student))
+                        return false;
+                }
+
+                foreach (Instructor instructor in GetInstructors())
+                {
+                    if (!session.GetInstructors().Contains(instructor))
+                        return false;
+                }
+            }
+            else
+                return false;
+
+            return true;
         }
     }
 }

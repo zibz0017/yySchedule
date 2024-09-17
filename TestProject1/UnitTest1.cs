@@ -158,9 +158,35 @@ namespace TestProject1
         {
             Sessions = ScheduleTest1Setup();
             Schedule.AddSessionsToSlots(Sessions[0], 0, 0);
-            Schedule.AddSessionsToSlots(Sessions[1], 1, 0);
-            Schedule.AddSessionsToSlots(Sessions[2], 1, 0);
-            
+            Schedule.AddSessionsToSlots(Sessions[1], 1, 4);
+            Schedule.AddSessionsToSlots(Sessions[2], 1, 7);
+            Schedule.AddSessionsToSlots(Sessions[3], 4, 0);
+
+            Assert.IsTrue(Schedule.CheckIfSessionOnDay(Sessions[0], 0));
+            for (int i = 1; i < Schedule.AmountOfDays; i++)
+            {
+                Assert.IsFalse(Schedule.CheckIfSessionOnDay(Sessions[0], i));
+            }
+
+            Assert.IsFalse(Schedule.CheckIfSessionOnDay(Sessions[1], 0));
+            Assert.IsTrue(Schedule.CheckIfSessionOnDay(Sessions[1], 1));
+            for (int i = 2; i < Schedule.AmountOfDays; i++)
+            {
+                Assert.IsFalse(Schedule.CheckIfSessionOnDay(Sessions[1], i));
+            }
+
+            Assert.IsFalse(Schedule.CheckIfSessionOnDay(Sessions[2], 0));
+            Assert.IsTrue(Schedule.CheckIfSessionOnDay(Sessions[2], 1));
+            for (int i = 2; i < Schedule.AmountOfDays; i++)
+            {
+                Assert.IsFalse(Schedule.CheckIfSessionOnDay(Sessions[2], i));
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                Assert.IsFalse(Schedule.CheckIfSessionOnDay(Sessions[3], i));
+            }
+            Assert.IsTrue(Schedule.CheckIfSessionOnDay(Sessions[3], 4));
         }
 
         public List<Session> ScheduleTest1Setup()
@@ -189,7 +215,7 @@ namespace TestProject1
             Student student3 = new Student(timeRestrictions);
             Student student4 = new Student(timeRestrictions);
             Student student5 = new Student(timeRestrictions);
-            List<Student> students = new List<Student>()
+            List<Student> students1 = new List<Student>()
             {
                 student1,
                 student2,
@@ -198,10 +224,31 @@ namespace TestProject1
                 student5
             };
 
-            Session session1 = new Session(instructors, students, 1, timeRestrictions, null, null, 2);
-            Session session2 = new Session(instructors, students, 1, timeRestrictions, null, null, 2);
-            Session session3 = new Session(instructors, students, 1, timeRestrictions, null, null, 2);
-            Session session4 = new Session(instructors, students, 1, timeRestrictions, null, null, 2);
+            List<Student> students2 = new List<Student>()
+            {
+                student1,
+                student2,
+                student3,
+                student4
+            };
+
+            List<Student> students3 = new List<Student>()
+            {
+                student1,
+                student2,
+                student3
+            };
+
+            List<Student> students4 = new List<Student>()
+            {
+                student1,
+                student2
+            };
+
+            Session session1 = new Session(instructors, students1, 1, timeRestrictions, null, null, 2);
+            Session session2 = new Session(instructors, students2, 1, timeRestrictions, null, null, 2);
+            Session session3 = new Session(instructors, students3, 1, timeRestrictions, null, null, 2);
+            Session session4 = new Session(instructors, students4, 1, timeRestrictions, null, null, 2);
 
             List<Session> sessions = new List<Session>()
             {
